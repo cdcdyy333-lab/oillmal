@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetDoc - ศูนย์ความรู้และการแก้ไขปัญหาอินเทอร์เน็ต</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font - Kanit & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        skybrand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            300: '#7cc8fb',
+                            400: '#36a9f7',
+                            500: '#0c8de9',
+                            600: '#0270ca',
+                            700: '#0359a4',
+                            800: '#074c87',
+                            900: '#0c4070',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Kanit', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: #f4f9ff;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e0effe;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #7cc8fb;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #36a9f7;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(186, 224, 253, 0.5);
+        }
+
+        .cute-shadow {
+            box-shadow: 0 10px 25px -5px rgba(54, 169, 247, 0.15), 0 8px 10px -6px rgba(54, 169, 247, 0.1);
+        }
+
+        .floating-anim {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Line Clamp */
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Typography & Layout Spacing Fixes to Prevent Text Overlap */
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.35 !important;
+            word-break: break-word;
+        }
+
+        p, span, li, button, a {
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body class="text-slate-700 min-h-screen flex flex-col antialiased selection:bg-skybrand-200 selection:text-skybrand-900">
+
+    <!-- ==================== 1. LANDING SPLASH SCREEN ==================== -->
+    <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-skybrand-50 via-white to-skybrand-100 transition-opacity duration-700 p-4 overflow-y-auto">
+        <div class="max-w-xl text-center space-y-6 floating-anim my-auto py-6">
+            <!-- Cute Mascot/Logo Illustration -->
+            <div class="relative w-36 h-36 mx-auto mb-4">
+                <div class="absolute inset-0 bg-skybrand-300 rounded-full blur-2xl opacity-50 animate-pulse"></div>
+                <div class="relative w-full h-full bg-white rounded-3xl shadow-xl flex items-center justify-center border-4 border-skybrand-200">
+                    <i class="fa-solid fa-wifi-fair text-6xl text-skybrand-500"></i>
+                    <span class="absolute top-2 right-2 flex h-4 w-4">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-skybrand-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-4 w-4 bg-skybrand-500"></span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <span class="inline-block px-4 py-1.5 text-xs font-semibold bg-skybrand-100 text-skybrand-700 rounded-full border border-skybrand-200 uppercase tracking-wider mb-2">
+                    <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> NetDoc Assistant
+                </span>
+                <h1 class="text-2xl sm:text-4xl md:text-5xl font-bold text-skybrand-900 leading-snug px-2">
+                    เว็บไซต์การแก้ไขปัญหาอินเทอร์เน็ตเบื้องต้น
+                </h1>
+                <p class="text-slate-600 text-sm md:text-base leading-relaxed px-4 max-w-lg mx-auto">
+                    รวบรวมอาการ สาเหตุ และขั้นตอนแก้ไขปัญหาเครือข่ายคอมพิวเตอร์แบบละเอียด 42 ปัญหา เข้าใจง่าย เหมาะสำหรับทุกคน
+                </p>
+            </div>
+
+            <!-- Features Highlights -->
+            <div class="grid grid-cols-3 gap-3 text-center text-xs text-slate-600 py-2 max-w-md mx-auto">
+                <div class="bg-white/80 p-3 rounded-2xl border border-skybrand-100 shadow-sm flex flex-col items-center justify-center space-y-1">
+                    <i class="fa-solid fa-list-check text-skybrand-500 text-lg block"></i>
+                    <span class="font-medium">12 หมวดหมู่</span>
+                </div>
+                <div class="bg-white/80 p-3 rounded-2xl border border-skybrand-100 shadow-sm flex flex-col items-center justify-center space-y-1">
+                    <i class="fa-solid fa-bolt text-skybrand-500 text-lg block"></i>
+                    <span class="font-medium">42 ปัญหาที่พบบ่อย</span>
+                </div>
+                <div class="bg-white/80 p-3 rounded-2xl border border-skybrand-100 shadow-sm flex flex-col items-center justify-center space-y-1">
+                    <i class="fa-solid fa-magnifying-glass text-skybrand-500 text-lg block"></i>
+                    <span class="font-medium">ค้นหาแม่นยำ</span>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <button onclick="enterApp()" class="w-full sm:w-auto px-8 py-4 bg-skybrand-500 hover:bg-skybrand-600 text-white font-medium text-base sm:text-lg rounded-2xl shadow-lg shadow-skybrand-300/50 transition-all transform hover:-translate-y-1 active:translate-y-0 flex items-center justify-center mx-auto space-x-3 group">
+                    <span>เริ่มต้นใช้งาน / แก้ไขปัญหา</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== 2. MAIN APPLICATION CONTENT ==================== -->
+    <div id="mainApp" class="hidden min-h-screen flex flex-col">
+
+        <!-- Top Header Navigation -->
+        <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-skybrand-100 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+                
+                <!-- Logo & Drawer Toggle -->
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleSidebar()" class="lg:hidden p-2 text-slate-600 hover:text-skybrand-600 hover:bg-skybrand-50 rounded-xl transition">
+                        <i class="fa-solid fa-bars-staggered text-xl"></i>
+                    </button>
+                    <a href="#" onclick="showSection('home')" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-skybrand-500 rounded-xl flex items-center justify-center text-white shadow-md shadow-skybrand-200">
+                            <i class="fa-solid fa-network-wired text-lg"></i>
+                        </div>
+                        <span class="font-bold text-xl text-skybrand-900 hidden sm:inline-block">Net<span class="text-skybrand-500">Doc</span></span>
+                    </a>
+                </div>
+
+                <!-- Global Search Bar -->
+                <div class="flex-1 max-w-xl relative">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="globalSearchInput" oninput="handleSearch()" placeholder="ค้นหาปัญหา, อาการ, IP, DNS, Wi-Fi..." 
+                            class="w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-skybrand-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-skybrand-400 focus:bg-white transition">
+                        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="returnToSplashScreen()" class="flex items-center space-x-2 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-medium transition" title="กลับไปยังหน้าเริ่มต้นแรกสุด">
+                        <i class="fa-solid fa-arrow-rotate-left text-skybrand-500"></i>
+                        <span class="hidden md:inline">กลับหน้าต้อนรับ</span>
+                    </button>
+                    <button onclick="openGoogleSearchModal()" class="hidden sm:flex items-center space-x-2 px-3.5 py-2 bg-skybrand-50 text-skybrand-700 hover:bg-skybrand-100 rounded-xl text-xs font-medium border border-skybrand-200 transition">
+                        <i class="fa-brands fa-google text-skybrand-500"></i>
+                        <span>ค้นหา Google</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace Layout -->
+        <div class="flex-1 max-w-7xl w-full mx-auto flex">
+
+            <!-- Sidebar Overlay for Mobile -->
+            <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-slate-900/30 z-40 lg:hidden hidden backdrop-blur-sm"></div>
+
+            <!-- Sidebar Menu -->
+            <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-skybrand-100 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col justify-between pt-16 lg:pt-0">
+                <div class="p-4 space-y-6 overflow-y-auto max-h-[calc(100vh-4rem)]">
+                    
+                    <div>
+                        <p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">เมนูหลัก</p>
+                        <nav class="space-y-1">
+                            <button onclick="showSection('home')" id="nav-home" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-skybrand-600 bg-skybrand-50 border border-skybrand-100 transition">
+                                <i class="fa-solid fa-house w-5 text-center"></i>
+                                <span>หน้าหลัก</span>
+                            </button>
+                            <button onclick="showSection('categories')" id="nav-categories" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-600 hover:bg-skybrand-50 hover:text-skybrand-600 transition">
+                                <i class="fa-solid fa-layer-group w-5 text-center"></i>
+                                <span>หมวดหมู่ปัญหา</span>
+                            </button>
+                            <button onclick="showSection('all-issues')" id="nav-all-issues" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-600 hover:bg-skybrand-50 hover:text-skybrand-600 transition">
+                                <i class="fa-solid fa-list-ul w-5 text-center"></i>
+                                <span>รายการปัญหาทั้งหมด</span>
+                            </button>
+                            <button onclick="showSection('about')" id="nav-about" class="nav-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-600 hover:bg-skybrand-50 hover:text-skybrand-600 transition">
+                                <i class="fa-solid fa-circle-info w-5 text-center"></i>
+                                <span>เกี่ยวกับเว็บไซต์</span>
+                            </button>
+                            <button onclick="returnToSplashScreen()" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition border border-dashed border-red-200 mt-2">
+                                <i class="fa-solid fa-power-off w-5 text-center"></i>
+                                <span>กลับหน้าต้อนรับ (เริ่มต้นใหม่)</span>
+                            </button>
+                        </nav>
+                    </div>
+
+                    <!-- Quick Category List -->
+                    <div>
+                        <p class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">หมวดหมู่ด่วน</p>
+                        <div id="sidebarCategories" class="space-y-1 text-xs">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 border-t border-skybrand-100 bg-skybrand-50/50">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full bg-skybrand-200 text-skybrand-700 flex items-center justify-center font-bold text-xs">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <div class="text-xs">
+                            <p class="font-medium text-slate-700">ระบบช่วยเหลือออนไลน์</p>
+                            <p class="text-slate-400">เวอร์ชัน 2.5 (Offline Ready)</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Display Area -->
+            <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden">
+                
+                <!-- 2.1 HOME SECTION -->
+                <section id="section-home" class="space-y-8">
+                    <!-- Banner Hero -->
+                    <div class="relative bg-gradient-to-r from-skybrand-500 to-skybrand-600 rounded-3xl p-6 sm:p-8 text-white shadow-lg shadow-skybrand-200 overflow-hidden">
+                        <div class="absolute right-0 bottom-0 opacity-10 transform translate-x-10 translate-y-10">
+                            <i class="fa-solid fa-laptop-code text-[220px]"></i>
+                        </div>
+                        <div class="relative z-10 max-w-xl space-y-4">
+                            <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium border border-white/30">
+                                <i class="fa-solid fa-lightbulb text-yellow-300 mr-1"></i> ช่วยเหลือตนเองเบื้องต้น
+                            </span>
+                            <h2 class="text-2xl sm:text-4xl font-bold leading-tight">พบปัญหาอินเทอร์เน็ตบนคอมพิวเตอร์?</h2>
+                            <p class="text-skybrand-100 text-sm sm:text-base">ค้นหาแนวทางแก้ไขอย่างเป็นขั้นตอน จากฐานข้อมูลปัญหาครอบคลุมถึง 42 รายการ วิเคราะห์สาเหตุและวิธีแก้ได้ทันที</p>
+                            <div class="pt-2 flex flex-wrap gap-3">
+                                <button onclick="showSection('all-issues')" class="px-5 py-2.5 bg-white text-skybrand-600 font-medium text-sm rounded-xl shadow-md hover:bg-skybrand-50 transition">
+                                    ดูรายการทั้งหมด
+                                </button>
+                                <button onclick="filterByCategory(1)" class="px-5 py-2.5 bg-skybrand-700/50 hover:bg-skybrand-700 text-white font-medium text-sm rounded-xl border border-white/20 transition">
+                                    ปัญหา Wi-Fi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Quick Badges Slider -->
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-bold text-skybrand-900 flex items-center">
+                                <i class="fa-solid fa-grid-2 text-skybrand-500 mr-2"></i> หมวดหมู่ปัญหายอดนิยม
+                            </h3>
+                            <button onclick="showSection('categories')" class="text-xs font-medium text-skybrand-600 hover:text-skybrand-800">ดูทั้งหมด 12 หมวด <i class="fa-solid fa-chevron-right ml-1"></i></button>
+                        </div>
+                        <div id="homeCategoriesGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Featured Issues Cards Section -->
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-bold text-skybrand-900 flex items-center">
+                                <i class="fa-solid fa-fire text-red-500 mr-2"></i> ปัญหาที่พบบ่อย (Recommended)
+                            </h3>
+                        </div>
+                        <div id="featuredIssuesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                            <!-- Featured Cards Populated via JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2.3 CATEGORIES SECTION -->
+                <section id="section-categories" class="hidden space-y-6">
+                    <div class="border-b border-skybrand-100 pb-4">
+                        <h2 class="text-2xl font-bold text-skybrand-900">หมวดหมู่ปัญหาทั้งหมด</h2>
+                        <p class="text-slate-500 text-sm">เลือกหมวดหมู่ที่ต้องการเพื่อกรองปัญหาเฉพาะด้าน</p>
+                    </div>
+                    <div id="fullCategoriesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <!-- Populated via JS -->
+                    </div>
+                </section>
+
+                <!-- 2.2 & 2.7 LIST ISSUES / SEARCH RESULTS SECTION -->
+                <section id="section-all-issues" class="hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-skybrand-100 pb-4">
+                        <div>
+                            <h2 id="issuesTitle" class="text-2xl font-bold text-skybrand-900">รายการปัญหาทั้งหมด</h2>
+                            <p id="issuesSubtitle" class="text-slate-500 text-sm">แสดงรายการปัญหาและวิธีแก้ไขในระบบ</p>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-slate-500">ตัวกรองหมวดหมู่:</span>
+                            <select id="categoryFilter" onchange="handleCategoryFilterChange(this.value)" class="bg-white border border-skybrand-200 text-xs rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-skybrand-400">
+                                <option value="all">ทุกหมวดหมู่ (All)</option>
+                                <!-- Category Options via JS -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Cards Container -->
+                    <div id="issuesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        <!-- Populated via JS -->
+                    </div>
+
+                    <!-- No Results Box -->
+                    <div id="noResultsBox" class="hidden text-center py-16 bg-white rounded-3xl border border-skybrand-100 cute-shadow p-6">
+                        <div class="w-20 h-20 bg-skybrand-50 text-skybrand-400 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                            <i class="fa-solid fa-magnifying-glass text-slate-300"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">ไม่พบปัญหาที่ตรงกับคำค้นหาของคุณ</h3>
+                        <p class="text-slate-500 text-sm max-w-md mx-auto mb-6">ลองเปลี่ยนคำค้นหา ค้นหาด้วยคำสั้นๆ หรือใช้ระบบค้นหาเพิ่มเติมจาก Google ด้านล่าง</p>
+                        <button onclick="searchCurrentOnGoogle()" class="px-5 py-2.5 bg-skybrand-500 hover:bg-skybrand-600 text-white rounded-xl font-medium text-sm transition inline-flex items-center space-x-2">
+                            <i class="fa-brands fa-google"></i>
+                            <span>ค้นหาข้อมูลเพิ่มเติมจาก Google</span>
+                        </button>
+                    </div>
+
+                    <!-- Pagination / Swipe Controls -->
+                    <div id="paginationControls" class="flex items-center justify-between border-t border-skybrand-100 pt-6">
+                        <button id="prevPageBtn" onclick="changePage(-1)" class="px-4 py-2 bg-white border border-skybrand-200 text-slate-600 rounded-xl text-sm font-medium hover:bg-skybrand-50 transition flex items-center space-x-2 disabled:opacity-50">
+                            <i class="fa-solid fa-chevron-left"></i>
+                            <span>หน้าก่อนหน้า</span>
+                        </button>
+                        <span id="pageIndicator" class="text-xs font-semibold text-skybrand-700 bg-skybrand-50 px-3 py-1.5 rounded-full border border-skybrand-100">
+                            หน้า 1 / 4
+                        </span>
+                        <button id="nextPageBtn" onclick="changePage(1)" class="px-4 py-2 bg-white border border-skybrand-200 text-slate-600 rounded-xl text-sm font-medium hover:bg-skybrand-50 transition flex items-center space-x-2 disabled:opacity-50">
+                            <span>หน้าถัดไป</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- ABOUT SECTION -->
+                <section id="section-about" class="hidden space-y-6 max-w-3xl mx-auto">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-skybrand-100 cute-shadow space-y-6">
+                        <div class="text-center space-y-3">
+                            <div class="w-16 h-16 bg-skybrand-100 text-skybrand-600 rounded-2xl flex items-center justify-center mx-auto text-2xl font-bold">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </div>
+                            <h2 class="text-2xl font-bold text-skybrand-900">เกี่ยวกับเว็บไซต์ NetDoc</h2>
+                            <p class="text-slate-500 text-sm">แหล่งเรียนรู้และการแก้ไขปัญหาการเชื่อมต่ออินเทอร์เน็ตบนคอมพิวเตอร์</p>
+                        </div>
+                        
+                        <div class="space-y-4 text-sm text-slate-600 leading-relaxed">
+                            <h3 class="font-bold text-skybrand-800 text-base border-b border-skybrand-100 pb-2">แนวคิดและวัตถุประสงค์</h3>
+                            <p>
+                                เว็บไซต์นี้พัฒนาขึ้นเพื่อเป็นคู่มือดิจิทัลสำหรับการเรียนรู้และแก้ไขปัญหาการใช้งานอินเทอร์เน็ตบนคอมพิวเตอร์ด้วยตนเอง โดยรวบรวมสถานการณ์จริงที่ผู้ใช้มักประสบ พร้อมจำแนกสาเหตุ ขั้นตอนแก้ไขแบบเป็นลำดับขั้น (Step-by-Step) และการตรวจสอบเชิงลึก
+                            </p>
+                            
+                            <h3 class="font-bold text-skybrand-800 text-base border-b border-skybrand-100 pb-2">คุณลักษณะของระบบ</h3>
+                            <ul class="list-disc list-inside space-y-1 pl-2">
+                                <li>ฐานข้อมูลปัญหากว่า 42 รายการ ครอบคลุม 12 หมวดหมู่</li>
+                                <li>ระบบค้นหาอัตโนมัติจากคำสำคัญ อาการ และชื่อปัญหา</li>
+                                <li>คู่มือแก้ไขเรียงจากวิธีขั้นพื้นฐานไปจนถึงระดับสูงอย่างปลอดภัย</li>
+                                <li>ระบบเชื่อมโยงค้นหาเพิ่มเติมบน Google</li>
+                            </ul>
+
+                            <div class="p-4 bg-skybrand-50 rounded-2xl border border-skybrand-100 text-xs text-skybrand-900">
+                                <p class="font-semibold mb-1"><i class="fa-solid fa-shield-halved mr-1"></i> หมายเหตุความปลอดภัย:</p>
+                                <p>วิธีแก้ไขในระบบเน้นความปลอดภัยต่อระบบปฏิบัติการและการตั้งค่าเครือข่ายของผู้ใช้ ไม่แนะนำให้ทำการรีเซ็ตโดยไม่จำเป็น</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t border-skybrand-100 mt-auto py-6">
+            <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 space-y-2">
+                <p>© 2026 NetDoc Knowledge Base. พัฒนาขึ้นเพื่อประโยชน์ทางการศึกษาและการแก้ไขปัญหาเบื้องต้น</p>
+                <p class="text-slate-400">อ้างอิงข้อมูลทางเทคนิคจาก Microsoft Support & Google Chrome Help Center</p>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ==================== 2.4 & 2.5 ISSUE DETAIL MODAL ==================== -->
+    <div id="issueModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden transition-opacity">
+        <div class="bg-white w-full max-w-3xl rounded-3xl shadow-2xl border border-skybrand-100 overflow-hidden max-h-[90vh] flex flex-col transform transition-transform scale-95 opacity-0" id="modalContent">
+            
+            <!-- Modal Header -->
+            <div class="p-5 sm:p-6 bg-gradient-to-r from-skybrand-500 to-skybrand-600 text-white flex justify-between items-start">
+                <div class="space-y-1 pr-4">
+                    <span id="modalCategoryBadge" class="inline-block px-2.5 py-0.5 bg-white/20 text-white text-xs font-medium rounded-full border border-white/30">
+                        หมวดหมู่
+                    </span>
+                    <h3 id="modalTitle" class="text-xl sm:text-2xl font-bold leading-tight">ชื่อปัญหา</h3>
+                </div>
+                <button onclick="closeModal()" class="text-white/80 hover:text-white p-2 rounded-xl hover:bg-white/10 transition">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+            </div>
+
+            <!-- Modal Sub-Header / Back Bar -->
+            <div class="px-6 py-2.5 bg-skybrand-50 border-b border-skybrand-100 flex items-center justify-between">
+                <button onclick="backToProblemListFromModal()" class="inline-flex items-center space-x-2 text-xs font-semibold text-skybrand-700 hover:text-skybrand-900 transition">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>ย้อนกลับไปหน้ารายการปัญหา</span>
+                </button>
+                <span class="text-[11px] text-slate-400">NetDoc Diagnostic View</span>
+            </div>
+
+            <!-- Modal Body (Scrollable) -->
+            <div class="p-5 sm:p-6 overflow-y-auto space-y-6 flex-1 text-sm text-slate-700">
+                
+                <!-- Graphic Image / Illustration Placeholder -->
+                <div class="w-full h-44 bg-skybrand-50 rounded-2xl flex items-center justify-center border border-skybrand-100 overflow-hidden relative">
+                    <img id="modalImage" src="" alt="ภาพประกอบปัญหา" class="w-full h-full object-cover hidden">
+                    <div id="modalImageFallback" class="text-center p-4">
+                        <i id="modalIcon" class="fa-solid fa-network-wired text-5xl text-skybrand-400 mb-2"></i>
+                        <p class="text-xs text-skybrand-600 font-medium">ภาพประกอบและไดอะแกรมที่เกี่ยวข้องกับเครือข่าย</p>
+                    </div>
+                </div>
+
+                <!-- 1. Symptoms -->
+                <div class="bg-red-50/70 p-4 rounded-2xl border border-red-100">
+                    <h4 class="font-bold text-red-700 flex items-center mb-1 text-base">
+                        <i class="fa-solid fa-triangle-exclamation mr-2"></i> อาการที่พบ (Symptoms)
+                    </h4>
+                    <p id="modalSymptoms" class="text-slate-700 leading-relaxed">...</p>
+                </div>
+
+                <!-- 2. Possible Causes -->
+                <div class="bg-amber-50/70 p-4 rounded-2xl border border-amber-100">
+                    <h4 class="font-bold text-amber-800 flex items-center mb-1 text-base">
+                        <i class="fa-solid fa-circle-question mr-2"></i> สาเหตุที่เป็นไปได้ (Possible Causes)
+                    </h4>
+                    <p id="modalCauses" class="text-slate-700 leading-relaxed">...</p>
+                </div>
+
+                <!-- 3. Step-by-Step Solutions -->
+                <div>
+                    <h4 class="font-bold text-skybrand-900 text-base mb-3 flex items-center">
+                        <i class="fa-solid fa-list-ol text-skybrand-500 mr-2"></i> วิธีแก้ไขทีละขั้นตอน (Step-by-Step Solutions)
+                    </h4>
+                    <div id="modalSteps" class="space-y-3">
+                        <!-- Step items inserted dynamically -->
+                    </div>
+                </div>
+
+                <!-- 4. Expected Results -->
+                <div class="bg-emerald-50/70 p-4 rounded-2xl border border-emerald-100">
+                    <h4 class="font-bold text-emerald-800 flex items-center mb-1 text-base">
+                        <i class="fa-solid fa-circle-check mr-2"></i> ผลลัพธ์ที่ควรได้รับ (Expected Outcome)
+                    </h4>
+                    <p id="modalExpected" class="text-slate-700 leading-relaxed">...</p>
+                </div>
+
+                <!-- 5. Additional Check -->
+                <div class="bg-skybrand-50/70 p-4 rounded-2xl border border-skybrand-100">
+                    <h4 class="font-bold text-skybrand-800 flex items-center mb-1 text-base">
+                        <i class="fa-solid fa-magnifying-glass-plus mr-2"></i> วิธีตรวจสอบเพิ่มเติมหากยังแก้ไม่ได้
+                    </h4>
+                    <p id="modalNextCheck" class="text-slate-700 leading-relaxed">...</p>
+                </div>
+
+                <!-- 6. References -->
+                <div class="border-t border-skybrand-100 pt-4 text-xs text-slate-500 flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex items-center space-x-1">
+                        <i class="fa-solid fa-link text-slate-400"></i>
+                        <span>แหล่งข้อมูลอ้างอิง: </span>
+                        <a id="modalRefLink" href="#" target="_blank" class="text-skybrand-600 hover:underline font-medium">Microsoft / Google Support</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 bg-slate-50 border-t border-skybrand-100 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <button id="googleSearchModalBtn" onclick="searchModalIssueOnGoogle()" class="w-full sm:w-auto px-4 py-2.5 bg-white border border-skybrand-200 text-skybrand-700 hover:bg-skybrand-50 rounded-xl font-medium text-xs flex items-center justify-center space-x-2 transition">
+                    <i class="fa-brands fa-google text-skybrand-500"></i>
+                    <span>ค้นหาข้อมูลเพิ่มเติมจาก Google</span>
+                </button>
+                <button onclick="closeModal()" class="w-full sm:w-auto px-6 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl font-medium text-xs transition">
+                    ปิดหน้าต่าง
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== GOOGLE SEARCH DIRECT MODAL ==================== -->
+    <div id="googleSearchPromptModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm hidden">
+        <div class="bg-white w-full max-w-md rounded-3xl p-6 border border-skybrand-100 shadow-xl space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold text-skybrand-900 text-lg flex items-center">
+                    <i class="fa-brands fa-google text-skybrand-500 mr-2"></i> ค้นหาผ่าน Google
+                </h3>
+                <button onclick="closeGooglePrompt()" class="text-slate-400 hover:text-slate-600">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <p class="text-xs text-slate-500">ระบบจะส่งคำค้นหาที่คุณระบุไปยัง Google Search ในแท็บใหม่ (ข้อมูลจากภายนอกเว็บไซต์)</p>
+            <div>
+                <input type="text" id="customGoogleQuery" placeholder="ระบุคำค้นหา เช่น คอมเชื่อม wifi ไม่ติด..." class="w-full px-4 py-2.5 bg-slate-50 border border-skybrand-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-skybrand-400">
+            </div>
+            <div class="flex justify-end space-x-2 pt-2">
+                <button onclick="closeGooglePrompt()" class="px-4 py-2 bg-slate-100 text-slate-600 text-xs rounded-xl font-medium">ยกเลิก</button>
+                <button onclick="execGooglePromptSearch()" class="px-4 py-2 bg-skybrand-500 text-white text-xs rounded-xl font-medium hover:bg-skybrand-600">ค้นหาเลย</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== JAVASCRIPT APP LOGIC & DATABASE ==================== -->
+    <script>
+        /* ----------------------------------------------------
+           1. 12 CATEGORIES DATABASE
+        ---------------------------------------------------- */
+        const categories = [
+            { id: 1, name: "ปัญหา Wi-Fi", icon: "fa-wifi", count: 7, desc: "การเชื่อมต่อไร้สาย สัญญาณ รหัสผ่าน และเครือข่าย Wi-Fi" },
+            { id: 2, name: "ปัญหาสาย LAN", icon: "fa-network-wired", count: 3, desc: "สาย Ethernet, พอร์ต LAN และการเชื่อมต่อแบบใช้สาย" },
+            { id: 3, name: "ปัญหาอินเทอร์เน็ตช้า", icon: "fa-gauge-high", count: 4, desc: "ความเร็วตก ความหน่วงสูง ความคล่องตัวของสัญญาณ" },
+            { id: 4, name: "ปัญหาเชื่อมต่ออินเทอร์เน็ตไม่ได้", icon: "fa-ban", count: 4, desc: "ต่อได้แต่ไม่มีเน็ต ขึ้นเครื่องหมายตกใจ หรือ No Internet" },
+            { id: 5, name: "ปัญหาสัญญาณอินเทอร์เน็ตหลุดบ่อย", icon: "fa-arrows-rotate", count: 3, desc: "เน็ตติดๆ ดับๆ สัญญาณแกว่ง หลุดทุกกี่นาที" },
+            { id: 6, name: "ปัญหา DNS", icon: "fa-server", count: 3, desc: "DNS Server Not Responding, แปลง Domain Name ไม่ได้" },
+            { id: 7, name: "ปัญหา IP Address", icon: "fa-address-card", count: 4, desc: "IP Conflict, DHCP failure, APIPA 169.254.x.x" },
+            { id: 8, name: "ปัญหาเราเตอร์และโมเด็ม", icon: "fa-router", count: 3, desc: "ไฟสถานะผิดปกติ Gateway ไม่ตอบสนอง การค้างของอุปกรณ์" },
+            { id: 9, name: "ปัญหาระบบ Windows และเครือข่าย", icon: "fa-windows", count: 3, desc: "Unidentified Network, Driver การ์ดจอ/การ์ดแลน, Windows Update" },
+            { id: 10, name: "ปัญหาเบราว์เซอร์และการเข้าเว็บ", icon: "fa-globe", count: 3, desc: "เปิดไม่ได้บางเว็บ, SSL Certificate error, วันเวลาเครื่องไม่ตรง" },
+            { id: 11, name: "ปัญหา VPN, Proxy, Firewall", icon: "fa-shield-halved", count: 3, desc: "โดนบล็อกการเชื่อมต่อ โปรแกรมแอนตี้ไวรัสขัดขวาง" },
+            { id: 12, name: "ปัญหาอื่น ๆ ที่เกี่ยวข้อง", icon: "fa-sliders", count: 2, desc: "เครือข่ายสาธารณะ/หอพัก, Hotspot, Packet Loss" }
+        ];
+
+        /* ----------------------------------------------------
+           2. 42 COMPREHENSIVE NETWORK ISSUES DATABASE
+        ---------------------------------------------------- */
+        const issuesData = [
+            {
+                id: 1,
+                title: "คอมพิวเตอร์เชื่อมต่อ Wi-Fi ไม่ได้",
+                category: 1,
+                tags: ["wifi", "connect", "ไร้สาย"],
+                symptoms: "กดเลือกชื่อเครือข่าย Wi-Fi แล้วระบบแสดงข้อความ Can't connect to this network หรือพยายามเชื่อมต่อแต่ล้มเหลว",
+                causes: "ไดรเวอร์ Wi-Fi ค้าง, การจำค่าโปรไฟล์เครือข่ายเดิมผิดพลาด หรือการตั้งค่าความปลอดภัยไม่ตรงกัน",
+                solutionSteps: [
+                    "ปิด Wi-Fi บนคอมพิวเตอร์ แล้วเปิดใหม่อีกครั้ง",
+                    "คลิกขวาที่ชื่อ Wi-Fi แล้วเลือก 'Forget' (ลบเครือข่าย) จากนั้นกดเชื่อมต่อและใส่รหัสผ่านใหม่",
+                    "เปิด Device Manager > Network Adapters > คลิกขวาตัว Wi-Fi > เลือก Disable แล้ว Enable ใหม่",
+                    "รีสตาร์ตคอมพิวเตอร์ 1 ครั้ง"
+                ],
+                expectedResult: "คอมพิวเตอร์สามารถเชื่อมต่อ Wi-Fi และเข้าใช้งานอินเทอร์เน็ตได้ปกติ",
+                nextCheck: "หากยังไม่ได้ ให้ลองเชื่อมต่อ Wi-Fi ด้วยอุปกรณ์อื่น เช่น มือถือ เพื่อดูว่าเป็นที่ตัวเราเตอร์หรือไม่",
+                reference: "https://support.microsoft.com/th-th/windows/fix-wi-fi-connection-issues-in-windows"
+            },
+            {
+                id: 2,
+                title: "ไม่พบชื่อเครือข่าย Wi-Fi (SSID ไม่ขึ้น)",
+                category: 1,
+                tags: ["ssid", "hidden", "wifi"],
+                symptoms: "รายการ Wi-Fi บนคอมพิวเตอร์ไม่ปรากฏชื่อ Wi-Fi ของบ้านตนเอง แต่พบ Wi-Fi บ้านอื่น",
+                causes: "เราเตอร์ซ่อน SSID ไว้, คลื่นความถี่ (5GHz) ไม่รองรับกับการ์ด Wi-Fi บนคอมพิวเตอร์ หรือช่องสัญญาณ (Channel) ชนกัน",
+                solutionSteps: [
+                    "ตรวจสอบว่าการ์ด Wi-Fi บนคอมพิวเตอร์รองรับคลื่น 5GHz หรือไม่ หากไม่รองรับให้เปิดคลื่น 2.4GHz ที่เราเตอร์",
+                    "กด 'Hidden Network' หรือ 'เครือข่ายซ่อนอยู่' แล้วพิมพ์ชื่อ SSID และรหัสผ่านด้วยตนเอง",
+                    "ขยับคอมพิวเตอร์เข้าใกล้เราเตอร์มากขึ้นเพื่อทดสอบระยะสัญญาณ"
+                ],
+                expectedResult: "ชื่อ Wi-Fi ปรากฏในรายการและเชื่อมต่อได้",
+                nextCheck: "เข้าหน้าตั้งค่าเราเตอร์เพื่อตรวจสอบว่าได้เปิดการ Broadcast SSID อยู่หรือไม่",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 3,
+                title: "ใส่รหัสผ่าน Wi-Fi แล้วไม่สามารถเชื่อมต่อได้",
+                category: 1,
+                tags: ["password", "wpa2", "wpa3"],
+                symptoms: "ใส่รหัสผ่านแล้วขึ้น 'Incorrect Security Key' หรือค้างอยู่ที่หน้า 'Checking network requirements'",
+                causes: "พิมพ์รหัสผ่านผิดตัวอักษรใหญ่-เล็ก, มาตรฐานความปลอดภัย (WPA2/WPA3) บนเราเตอร์ไม่ตรงกับคอมพิวเตอร์",
+                solutionSteps: [
+                    "กดรูปดวงตาที่ช่องใส่รหัสผ่านเพื่อตรวจสอบตัวอักษรภาษาอังกฤษ ตัวพิมพ์ใหญ่-เล็ก และตัวเลขให้ถูกต้อง",
+                    "ลบโปรไฟล์ Wi-Fi เดิม (Forget Network) แล้วลองกดเชื่อมต่อใหม่",
+                    "ลองเปลี่ยน Security Encryption บนเราเตอร์จาก WPA3 เป็น WPA2/WPA3 Mixed Mode"
+                ],
+                expectedResult: "ระบบยืนยันรหัสผ่านถูกต้องและเชื่อมต่อสำเร็จ",
+                nextCheck: "ตรวจสอบแป้นพิมพ์ว่าปุ่ม Caps Lock ค้างอยู่หรือไม่",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 4,
+                title: "เชื่อมต่อ Wi-Fi ได้แต่ไม่มีอินเทอร์เน็ต (No Internet / Secured)",
+                category: 1,
+                tags: ["no internet", "secured", "wifi"],
+                symptoms: "ไอคอน Wi-Fi แสดงสถานะเชื่อมต่อสำเร็จ แต่มีเครื่องหมายตกใจสีเหลือง หรือขึ้นคำว่า 'Connected, no internet'",
+                causes: "เราเตอร์ไม่ได้รับสัญญาณจากผู้ให้บริการ (ISP), DNS มีปัญหา หรือ IP Address มีการชนกัน",
+                solutionSteps: [
+                    "ถอดปลั๊กเราเตอร์ ออกประมาณ 10-15 วินาที แล้วเสียบใหม่เพื่อล้างแคช",
+                    "เปิด Command Prompt (cmd) พิมพ์ ipconfig /release แล้วกด Enter จากนั้นพิมพ์ ipconfig /renew",
+                    "ทดสอบเปลี่ยน DNS Server เป็น 8.8.8.8 และ 8.8.4.4"
+                ],
+                expectedResult: "สถานะเปลี่ยนเป็น Connected, Internet Access และเข้าเว็บได้",
+                nextCheck: "สังเกตไฟ PON/Internet ที่ตัวเราเตอร์ว่าติดเป็นสีเขียวปกติหรือไม่",
+                reference: "https://support.google.com/chrome/"
+            },
+            {
+                id: 5,
+                title: "สัญญาณ Wi-Fi อ่อน (Signal Strength Low)",
+                category: 1,
+                tags: ["weak signal", "distance", "interference"],
+                symptoms: "ขีดสัญญาณ Wi-Fi แสดงเพียง 1-2 ขีด เน็ตหมุนช้า โหลดหน้าเว็บไม่ขึ้น",
+                causes: "คอมพิวเตอร์อยู่ไกลเราเตอร์เกินไป มีสิ่งกีดขวาง เช่น กำแพงคอนกรีต หรือมีสัญญาณรบกวนจากไมโครเวฟ/อุปกรณ์ไร้สายอื่น",
+                solutionSteps: [
+                    "ปรับเสาอากาศของเราเตอร์ให้ตั้งฉากเพื่อการกระจายสัญญาณที่ดีที่สุด",
+                    "สลับไปใช้คลื่นความถี่ 2.4GHz หากต้องใช้งานในระยะที่ไกลจากเราเตอร์ (2.4GHz ทะลุสิ่งกีดขวางได้ดีกว่า 5GHz)",
+                    "พิจารณาติดตั้ง Wi-Fi Extender หรือ Mesh Wi-Fi"
+                ],
+                expectedResult: "ความเข้มสัญญาณเพิ่มขึ้นเป็น 3-4 ขีด ความเร็วเน็ตเสถียรขึ้น",
+                nextCheck: "ใช้อุปกรณ์มือถือวัดค่าความเข้มสัญญาณ (RSSI) บริเวณโต๊ะทำงาน",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 6,
+                title: "อินเทอร์เน็ตช้ากว่าปกติ (Slow Internet Speed)",
+                category: 3,
+                tags: ["bandwidth", "slow", "speedtest"],
+                symptoms: "ทดสอบความเร็วอินเทอร์เน็ตแล้วได้ค่าน้อยกว่าแพ็กเกจที่สมัครไว้มาก วิดีโอเล่นที่ความละเอียดต่ำ",
+                causes: "มีการดาวน์โหลดไฟล์เบื้องหลัง, อุปกรณ์อื่นในบ้านดึงแบนด์วิธ, หรือมีแอปพลิเคชันสูบเน็ต",
+                solutionSteps: [
+                    "เปิด Task Manager (Ctrl+Shift+Esc) ดูที่ช่อง Network เพื่อหาโปรแกรมที่ใช้เน็ตสูง แล้วกด End Task",
+                    "เคลียร์แคชและคุกกี้ในเว็บเบราว์เซอร์",
+                    "ปิดการอัปเดต Windows ชั่วคราวหากกำลังดาวน์โหลดอยู่"
+                ],
+                expectedResult: "ความเร็วอินเทอร์เน็ตกลับมาใกล้วงเงินแพ็กเกจเดิม",
+                nextCheck: "ทดสอบความเร็วผ่านสาย LAN เพื่อยืนยันว่าช้าที่ระบบอินเทอร์เน็ตหรือช้าที่ Wi-Fi",
+                reference: "https://support.google.com/chrome/"
+            },
+            {
+                id: 7,
+                title: "อินเทอร์เน็ตหลุดบ่อย (Frequent Disconnections)",
+                category: 5,
+                tags: ["disconnect", "unstable", "drop"],
+                symptoms: "การเชื่อมต่อตัดขาดทุกๆ 5-10 นาที แล้วต่อใหม่อัตโนมัติ ทำให้เล่นเกมหรือประชุมออนไลน์ค้าง",
+                causes: "ตั้งค่า Power Management ให้ปิดการ์ดแลนเพื่อประหยัดพลังงาน, สัญญาณรบกวนสูง หรือเราเตอร์ร้อนเกินไป",
+                solutionSteps: [
+                    "ไปที่ Device Manager > Network Adapters > คลิกขวาการ์ด Wi-Fi > Properties > Power Management > ติ๊กเอา 'Allow the computer to turn off this device to save power' ออก",
+                    "ตรวจสอบความร้อนของเราเตอร์ และวางในที่ระบายอากาศได้ดี",
+                    "อัปเดตไดรเวอร์การ์ด Wi-Fi ให้เป็นเวอร์ชันล่าสุด"
+                ],
+                expectedResult: "การเชื่อมต่อเสถียรต่อเนื่อง ไม่ตัดหลุดระหว่างใช้งาน",
+                nextCheck: "ใช้คำสั่ง ping 8.8.8.8 -t ใน CMD เพื่อสังเกตช่วงเวลาที่ Request timed out",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 8,
+                title: "เชื่อมต่อสาย LAN ไม่ได้ (Ethernet Not Working)",
+                category: 2,
+                tags: ["lan", "ethernet", "cable"],
+                symptoms: "เสียบสาย LAN เข้าคอมพิวเตอร์แล้ว ไฟที่พอร์ต LAN ไม่ติด และคอมพิวเตอร์ไม่ขึ้นไอคอนสาย LAN",
+                causes: "สาย LAN ขาดภายใน, หัว RJ45 หลวม, พอร์ต LAN ชำรุด หรือการ์ด LAN โดน Disable",
+                solutionSteps: [
+                    "ถอดสาย LAN ออกแล้วเสียบใหม่ให้แน่นจนได้ยินเสียงล็อกดัง 'คลิก'",
+                    "ลองนำสาย LAN ไปเสียบช่องอื่นที่ตัวเราเตอร์",
+                    "ไปที่ Network Connections (ncpa.cpl) ตรวจสอบว่า Ethernet ถูก Disable อยู่หรือไม่ หากใช่ให้กด Enable"
+                ],
+                expectedResult: "ไฟที่พอร์ต LAN ติดสว่าง และคอมพิวเตอร์เชื่อมต่อเครือข่ายสาย LAN ได้",
+                nextCheck: "นำสาย LAN เส้นอื่นมาทดสอบเพื่อแยกแยะว่าเป็นที่สายหรือพอร์ตคอมพิวเตอร์",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 9,
+                title: "คอมพิวเตอร์ไม่ตรวจพบสาย Ethernet",
+                category: 2,
+                tags: ["ethernet", "adapter", "missing"],
+                symptoms: "ในหน้า Network Connections ไม่ปรากฏไอคอน Ethernet หรือใน Device Manager ขึ้นเครื่องหมายตกใจสีเหลืองที่ Network Adapter",
+                causes: "ไดรเวอร์ Ethernet Adapter สูญหาย เสียหาย หรือยังไม่ได้ติดตั้งหลังลง Windows ใหม่",
+                solutionSteps: [
+                    "เปิด Device Manager > Network Adapters > คลิกขวาเลือก 'Scan for hardware changes'",
+                    "ดาวน์โหลดไดรเวอร์ LAN จากเว็บไซต์ผู้ผลิตเมนบอร์ด/โน้ตบุ๊กมาติดตั้ง",
+                    "ใช้เครื่องมือ Windows Network Troubleshooter ในการวินิจฉัย"
+                ],
+                expectedResult: "ไดรเวอร์ Ethernet ทำงานปกติและมองเห็นพอร์ต LAN",
+                nextCheck: "ตรวจสอบใน BIOS/UEFI ว่าไม่ได้ปิด (Disable) Onboard LAN ไว้",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 10,
+                title: "ได้รับ IP Address ไม่ถูกต้อง (Autoconfiguration IP 169.254.x.x)",
+                category: 7,
+                tags: ["ip", "169.254", "apipa"],
+                symptoms: "คอมพิวเตอร์ได้ IP Address ขึ้นต้นด้วย 169.254.x.x และไม่สามารถเข้าอินเทอร์เน็ตได้",
+                causes: "คอมพิวเตอร์ไม่ได้รับ IP จาก DHCP Server ของเราเตอร์ (APIPA ทำงานแทน)",
+                solutionSteps: [
+                    "เปิด CMD ด้วยสิทธิ์ Administrator",
+                    "พิมพ์ ipconfig /release แล้วกด Enter",
+                    "พิมพ์ ipconfig /renew แล้วกด Enter เพื่อขอ IP ใหม่จากเราเตอร์",
+                    "รีสตาร์ตเราเตอร์ 1 ครั้ง"
+                ],
+                expectedResult: "คอมพิวเตอร์ได้รับ IP Address ชุดปกติ (เช่น 192.168.1.x)",
+                nextCheck: "ตรวจสอบว่าเราเตอร์เปิดบริการ DHCP Server อยู่หรือไม่",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 11,
+                title: "ไม่ได้รับ IP Address จาก DHCP Server",
+                category: 7,
+                tags: ["dhcp", "ip", "fail"],
+                symptoms: "ขึ้นข้อความ 'DHCP Lookup Failed' หรือ 'Unable to contact your DHCP server'",
+                causes: "บริการ DHCP Client ใน Windows หยุดทำงาน หรือจำนวน IP ใน Pools ของเราเตอร์เต็ม",
+                solutionSteps: [
+                    "กด Windows + R พิมพ์ services.msc ค้นหา 'DHCP Client' ตรวจสอบว่า Status เป็น Running",
+                    "ลองตั้งค่า IP Address แบบ Static (ชั่วคราว) เช่น IP: 192.168.1.150, Subnet: 255.255.255.0, Gateway: 192.168.1.1",
+                    "รีสตาร์ตเราเตอร์เพื่อเคลียร์รายการ DHCP Lease"
+                ],
+                expectedResult: "คอมพิวเตอร์ได้รับ IP Address และเชื่อมต่อได้",
+                nextCheck: "ขยายจำนวน Lease Time หรือช่วง IP ในเราเตอร์",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 12,
+                title: "DNS Server ไม่ตอบสนอง (DNS Server Not Responding)",
+                category: 6,
+                tags: ["dns", "not responding", "server"],
+                symptoms: "เบราว์เซอร์แจ้งข้อความ 'DNS_PROBE_FINISHED_NXDOMAIN' หรือ 'DNS Server Not Responding'",
+                causes: "เซิร์ฟเวอร์ DNS ของผู้ให้บริการอินเทอร์เน็ต (ISP) ล่ม หรือค่า DNS ในเครื่องเสียหาย",
+                solutionSteps: [
+                    "เปิด CMD แล้วพิมพ์ ipconfig /flushdns เพื่อล้างแคช DNS",
+                    "ไปที่ Network Connections > Properties ของ Wi-Fi/Ethernet > IPv4 > Properties",
+                    "เลือก 'Use the following DNS server addresses' พิมพ์ Preferred: 8.8.8.8, Alternate: 8.8.4.4 (Google Public DNS)",
+                    "กด OK แล้วรีเฟรชหน้าเว็บ"
+                ],
+                expectedResult: "เข้าใช้งานเว็บไซต์ได้ตามปกติทันที",
+                nextCheck: "ทดสอบใช้ Cloudflare DNS (1.1.1.1 และ 1.0.0.1) เป็นทางเลือกเพิ่มเติม",
+                reference: "https://support.google.com/chrome/"
+            },
+            {
+                id: 13,
+                title: "ไม่สามารถค้นหาที่อยู่เว็บไซต์ได้ (Server IP address could not be found)",
+                category: 6,
+                tags: ["domain", "dns", "lookup"],
+                symptoms: "เข้าเว็บไม่ได้ พิมพ์ URL แล้วขึ้น Err_Name_Not_Resolved",
+                causes: "พิมพ์ชื่อเว็บผิด, DNS เครือข่ายไม่สามารถค้นหา IP ของโดเมนนั้นได้",
+                solutionSteps: [
+                    "ตรวจสอบตัวสะกดชื่อโดเมน URL ให้ถูกต้อง",
+                    "ทำการ Reset Winsock Catalog โดยเปิด CMD แล้วพิมพ์ netsh winsock reset",
+                    "รีสตาร์ตคอมพิวเตอร์"
+                ],
+                expectedResult: "สามารถแปลงชื่อโดเมนเป็น IP และเปิดเว็บได้",
+                nextCheck: "ลองเข้าเว็บไซต์ด้วยเบราว์เซอร์อื่น หรือโหมดไม่ระบุตัวตน (Incognito)",
+                reference: "https://support.google.com/chrome/"
+            },
+            {
+                id: 14,
+                title: "เข้าเว็บด้วยชื่อโดเมนไม่ได้ แต่เข้าได้ด้วย IP Address",
+                category: 6,
+                tags: ["dns resolution", "ip access"],
+                symptoms: "พิมพ์ google.com เข้าไม่ได้ แต่พิมพ์ 142.250.198.46 สามารถเข้าได้",
+                causes: "ระบบแปลงชื่อโดเมน (DNS Client) บนคอมพิวเตอร์ขัดข้อง 100%",
+                solutionSteps: [
+                    "เปิด CMD แล้วพิมพ์ netsh int ip reset",
+                    "ตั้งค่า DNS ให้ใช้ Google DNS (8.8.8.8) หรือ Cloudflare DNS (1.1.1.1)",
+                    "ตรวจสอบไฟล์ Hosts ใน C:\\Windows\\System32\\drivers\\etc\\hosts ว่ามีบรรทัดสับสนหรือไม่"
+                ],
+                expectedResult: "พิมพ์ชื่อโดเมนแล้วเข้าเว็บไซต์ได้ปกติ",
+                nextCheck: "ตรวจเช็กว่าโปรแกรม Antivirus แอบล็อกพอร์ต DNS (Port 53) หรือไม่",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 15,
+                title: "เปิดบางเว็บไซต์ไม่ได้ (เข้า Facebook/YouTube ได้ แต่เข้าเว็บอื่นไม่ได้)",
+                category: 10,
+                tags: ["website block", "mtu", "ipv6"],
+                symptoms: "เข้าเว็บใหญ่ๆ ได้ แต่เข้าเว็บไซต์ทั่วไปหรือเว็บต่างประเทศไม่ได้",
+                causes: "ค่า MTU (Maximum Transmission Unit) ไม่เหมาะสม หรือปัญหา IPv6 ของ ISP",
+                solutionSteps: [
+                    "ลองปิดการใช้งาน IPv6 ใน Network Adapter Properties (ปลดติ๊ก Internet Protocol Version 6)",
+                    "ล้างแคชและประวัติการท่องเว็บในเบราว์เซอร์",
+                    "ลองเปลี่ยนไปใช้ DNS 1.1.1.1"
+                ],
+                expectedResult: "เปิดเข้าใช้งานได้ทุกเว็บไซต์อย่างสม่ำเสมอ",
+                nextCheck: "ทดสอบเข้าผ่านโปรแกรม VPN ว่าเปิดเว็บที่มีปัญหาได้หรือไม่",
+                reference: "https://support.google.com/chrome/"
+            },
+            {
+                id: 16,
+                title: "เปิดเว็บไซต์ไม่ได้ทุกเว็บไซต์ (Err_Connection_Refused)",
+                category: 10,
+                tags: ["connection refused", "browser"],
+                symptoms: "ทุกเบราว์เซอร์ขึ้น ERR_CONNECTION_REFUSED หรือ ERR_CONNECTION_TIMED_OUT",
+                causes: "Proxy Server ถูกเปิดทิ้งไว้โดยไม่ตั้งใจ หรือแอนตี้ไวรัสบล็อกอินเทอร์เน็ตทั้งหมด",
+                solutionSteps: [
+                    "กด Windows + I > Network & Internet > Proxy > ปิด 'Use a proxy server' ให้เป็น Off",
+                    "ตรวจสอบว่าโปรแกรม Firewall ไม่ได้บล็อกตัวเบราว์เซอร์ไว้",
+                    "รีเซ็ตการตั้งค่าเบราว์เซอร์กลับเป็นค่าเริ่มต้น"
+                ],
+                expectedResult: "เบราว์เซอร์เปิดหน้าเว็บต่างๆ ได้ตามปกติ",
+                nextCheck: "ตรวจสอบว่าสามารถ Ping ไปยัง 8.8.8.8 ผ่าน CMD ได้หรือไม่",
+                reference: "https://support.google.com/chrome/"
+            },
+            {
+                id: 17,
+                title: "ขึ้นข้อความ “ไม่มีอินเทอร์เน็ต” (You are offline)",
+                category: 4,
+                tags: ["offline", "no internet"],
+                symptoms: "หน้าจอเบราว์เซอร์ขึ้นรูปไดโนเสาร์ หรือข้อความ 'No Internet / You are offline'",
+                causes: "สายสัญญาณไฟเบอร์ภายนอกขาด, อุปกรณ์โมเด็มหลุดการเชื่อมต่อ หรือยังไม่ได้ชำระค่าบริการ",
+                solutionSteps: [
+                    "เช็กไฟสถานะ LOS หรือ PON บนเราเตอร์ หากขึ้นสีแดงแสดงว่าสายไฟเบอร์ภายนอกมีปัญหา ให้ติดต่อ ISP",
+                    "ตรวจสอบว่าคอมพิวเตอร์อยู่ในโหมดเครื่องบิน (Flight Mode) หรือไม่",
+                    "รีสตาร์ตโมเด็มและคอมพิวเตอร์"
+                ],
+                expectedResult: "การเชื่อมต่อกลับมาเป็น Online",
+                nextCheck: "โทรสอบถาม Call Center ผู้ให้บริการอินเทอร์เน็ตว่ามีเหตุขัดข้องในพื้นที่หรือไม่",
+                reference: "https://support.google.com/chrome/"
+            },
+            {
+                id: 18,
+                title: "เราเตอร์หรือโมเด็มไม่สามารถเชื่อมต่ออินเทอร์เน็ต",
+                category: 8,
+                tags: ["router", "modem", "isp"],
+                symptoms: "ตัวเราเตอร์เปิดติด ไฟ Wi-Fi ติด แต่ไม่มีสัญญาณอินเทอร์เน็ตส่งมายังอุปกรณ์ใดๆ ในบ้าน",
+                causes: "การเชื่อมต่อ PPPoE หลุด, ค่า Account ผู้ใช้งานในเราเตอร์หาย หรือโหนดผู้ให้บริการมีปัญหา",
+                solutionSteps: [
+                    "ถอดปลั๊กเราเตอร์ รอ 30 วินาที แล้วเสียบใหม่เพื่อเริ่มกระบวนการ Handshake ใหม่",
+                    "เข้าหน้า Admin เราเตอร์ (192.168.1.1) ตรวจสอบ WAN Status",
+                    "หากพบข้อความ Authentication Failed ให้แจ้งผู้ให้บริการส่งสัญญาณใหม่"
+                ],
+                expectedResult: "เราเตอร์ได้รับ WAN IP จากผู้ให้บริการและปล่อยอินเทอร์เน็ตได้",
+                nextCheck: "สังเกตความร้อนของโมเด็มว่าสูงผิดปกติหรือไม่",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 19,
+                title: "ไฟสถานะอินเทอร์เน็ตบนเราเตอร์ผิดปกติ (ไฟ LOS สีแดง)",
+                category: 8,
+                tags: ["router light", "los red", "fiber"],
+                symptoms: "ไฟสัญลักษณ์รูปโลก หรือไฟ LOS บนเราเตอร์กะพริบเป็นสีแดง หรือไม่ติดเลย",
+                causes: "สายเคเบิลใยแก้วนำแสง (Fiber Optic) โค้งงอ หัก ขาด หรือสัญญาณแสงอ่อนเกินเกณฑ์",
+                solutionSteps: [
+                    "ตรวจสอบสายไฟเบอร์สีเหลืองเส้นเล็กที่ต่อเข้าหลังเราเตอร์ว่าไม่ได้โดนกดทับหรือพับหักงอ",
+                    "ห้ามดึงสายไฟเบอร์ออกด้วยตนเองเพราะอาจทำให้อุปกรณ์ส่องแสงชำรุด",
+                    "ติดต่อช่างเทคนิคของผู้ให้บริการ (AIS/True/3BB/NT) เพื่อส่งช่างมาสเปกตรัมวัดสัญญาณแสง"
+                ],
+                expectedResult: "ไฟ LOS ดับลง และไฟ PON/Internet เปลี่ยนเป็นสีเขียวค้าง",
+                nextCheck: "ตรวจสอบสายภายนอกบ้านว่ามีกิ่งไม้ตกใส่หรือไม่",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 20,
+                title: "Windows แสดงข้อความ “ไม่สามารถระบุเครือข่ายได้” (Unidentified Network)",
+                category: 9,
+                tags: ["unidentified network", "windows"],
+                symptoms: "สถานะ Network ขึ้นคำว่า Unidentified Network No Internet Access",
+                causes: "Windows ไม่สามารถดึงระบุ Gateway หรือโปรไฟล์การระบุเครือข่ายเสียหาย",
+                solutionSteps: [
+                    "เปิด CMD (Run as Admin) พิมพ์คำสั่งรวดเดียว:\nnetsh winsock reset\nnetsh int ip reset\nipconfig /release\nipconfig /renew\nipconfig /flushdns",
+                    "รีสตาร์ตเครื่องคอมพิวเตอร์",
+                    "ปิดการทำงานของ Third-party Firewall ชั่วคราว"
+                ],
+                expectedResult: "เครือข่ายระบุชื่อเป็น Network/Private/Public และใช้งานได้",
+                nextCheck: "ตั้งค่า Network Location ให้เป็น Private Network",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 21,
+                title: "การตั้งค่าเครือข่าย Windows ผิดพลาด (Network Configuration Corrupted)",
+                category: 9,
+                tags: ["network reset", "windows setting"],
+                symptoms: "คอมพิวเตอร์รวน เชื่อมต่อเน็ตไม่ได้หลังโดนไวรัสหรือโปรแกรมลบไฟล์ระบบ",
+                causes: "ค่า Registry หรือ Protocol Stack ของระบบเครือข่ายเสียหาย",
+                solutionSteps: [
+                    "ไปที่ Settings > Network & Internet > Advanced network settings",
+                    "กดเลือก 'Network reset'",
+                    "กด 'Reset now' แล้วยืนยัน คอมพิวเตอร์จะทำการรีสตาร์ตเองภายใน 5 นาที"
+                ],
+                expectedResult: "การตั้งค่าเครือข่ายทั้งหมดถูกล้างเป็นค่าโรงงานและกลับมาสมบูรณ์",
+                nextCheck: "หลังรีสตาร์ต ให้ใส่รหัสผ่าน Wi-Fi ใหม่อีกครั้ง",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 22,
+                title: "ปัญหาไดรเวอร์การ์ดเครือข่าย (Network Adapter Driver Issue)",
+                category: 9,
+                tags: ["driver", "yellow exclamation", "adapter"],
+                symptoms: "อุปกรณ์การ์ดแลนขึ้นเครื่องหมายตกใจ yellow exclamation mark ใน Device Manager Code 10 หรือ Code 43",
+                causes: "ไดรเวอร์ไม่ตรงรุ่น หรือการอัปเดต Windows ทำลายไดรเวอร์เดิม",
+                solutionSteps: [
+                    "เข้า Device Manager > Network Adapters > คลิกขวาตัวการ์ด > Update driver > Search automatically",
+                    "หากไม่หาย ให้เลือก 'Roll Back Driver' กลับไปเวอร์ชันก่อนหน้า",
+                    "หรือเลือก Uninstall Device แล้วรีสตาร์ตเครื่องเพื่อให้ Windows ลงไดรเวอร์พื้นฐานใหม่อัตโนมัติ"
+                ],
+                expectedResult: "เครื่องหมายตกใจหายไป การ์ดทำงานปกติ",
+                nextCheck: "โหลดไดรเวอร์เตรียมใส่ Flashdrive ไว้จากเครื่องอื่น",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 23,
+                title: "ปัญหา Proxy (Proxy Server is refusing connections)",
+                category: 11,
+                tags: ["proxy", "refusing connection"],
+                symptoms: "ขึ้นแจ้งเตือน 'The proxy server is refusing connections' เปิดหน้าเว็บใดๆ ไม่ได้เลย",
+                causes: "มัลแวร์ หรือโปรแกรม VPN แอบเปลี่ยนตั้งค่า Proxy ทิ้งไว้",
+                solutionSteps: [
+                    "เปิด Control Panel > Internet Options > แท็บ Connections > กด 'LAN settings'",
+                    "เอาเครื่องหมายถูกออกจาก 'Use a proxy server for your LAN'",
+                    "ติ๊กถูกที่ 'Automatically detect settings' แทน แล้วกด OK"
+                ],
+                expectedResult: "ยกเลิกการผ่าน Proxy และใช้อินเทอร์เน็ตได้ทันที",
+                nextCheck: "สแกนไวรัสในเครื่องด้วย Windows Defender",
+                reference: "https://support.google.com/chrome/"
+            },
+            {
+                id: 24,
+                title: "VPN ทำให้เชื่อมต่ออินเทอร์เน็ตไม่ได้ (VPN Blocking Connection)",
+                category: 11,
+                tags: ["vpn", "killswitch", "blocked"],
+                symptoms: "พอปิดโปรแกรม VPN แล้ว อินเทอร์เน็ตในคอมพิวเตอร์ดับไปด้วย เข้าเว็บไม่ได้เลย",
+                causes: "ฟีเจอร์ VPN Kill Switch ยังคงทำงานบล็อกเน็ตจริงไว้เพื่อป้องกันข้อมูลรั่วไหล",
+                solutionSteps: [
+                    "เปิดโปรแกรม VPN แล้วกดปิดฟีเจอร์ 'Kill Switch' ในการตั้งค่าของโปรแกรม",
+                    "สั่ง Disconnect VPN แล้วปิดโปรแกรมอย่างสมบูรณ์ (Quit/Exit จาก System Tray)",
+                    "หากยังไม่ได้ ให้ Reset Network ใน Windows"
+                ],
+                expectedResult: "อินเทอร์เน็ตปกติกลับมาใช้งานได้โดยไม่ต้องเปิด VPN",
+                nextCheck: "ตรวจสอบว่า Tap Windows Adapter ของ VPN ถูก Disable แล้วหรือยัง",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 25,
+                title: "Firewall ขัดขวางการเชื่อมต่อ (Windows Defender Firewall Blocking)",
+                category: 11,
+                tags: ["firewall", "blocked", "port"],
+                symptoms: "แอปพลิเคชันหรือเกมแจ้งเตือนว่า 'Cannot connect to server' แต่เบราว์เซอร์ใช้งานได้ปกติ",
+                causes: "Windows Firewall บล็อกการส่งข้อมูล outbound/inbound ของแอปพลิเคชันนั้นๆ",
+                solutionSteps: [
+                    "ไปที่ Control Panel > Windows Defender Firewall > 'Allow an app or feature through Windows Defender Firewall'",
+                    "กด Change settings ค้นหาชื่อโปรแกรม แล้วติ๊กถูกทั้ง Private และ Public",
+                    "กด OK แล้วลองเปิดโปรแกรมใหม่อีกครั้ง"
+                ],
+                expectedResult: "โปรแกรม/เกม สามารถเชื่อมต่อเซิร์ฟเวอร์ออนไลน์ได้",
+                nextCheck: "ลองปิด Firewall ชั่วคราวเพื่อทดสอบว่าเป็นสาเหตุจริงหรือไม่",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 26,
+                title: "เบราว์เซอร์ไม่สามารถเปิดหน้าเว็บได้ (Browser Cache/Extension Issue)",
+                category: 10,
+                tags: ["chrome", "edge", "extension", "cache"],
+                symptoms: "เบราว์เซอร์หลัก (เช่น Chrome) เข้าเว็บไม่ได้ แต่เบราว์เซอร์อื่น (เช่น Edge) เข้าได้ปกติ",
+                causes: "Extension (ส่วนขยาย) บางตัวเสียค้าง หรือข้อมูล Cache/Cookie ในเบราว์เซอร์เน่าเสีย",
+                solutionSteps: [
+                    "ทดสอบเปิดโหมดไม่ระบุตัวตน (Incognito Mode) หากเข้าได้ แสดงว่าเป็นที่ Extension",
+                    "ปิดการทำงานของ Extensions ทั้งหมด แล้วค่อยเปิดทีละตัวเพื่อหาตัวปัญหา",
+                    "ไปที่ Setting เบราว์เซอร์ > Clear Browsing Data เลือก Cached images and files"
+                ],
+                expectedResult: "เบราว์เซอร์หลักกลับมาเปิดหน้าเว็บได้ตามปกติ",
+                nextCheck: "อัปเดตเบราว์เซอร์ให้เป็นเวอร์ชันล่าสุด",
+                reference: "https://support.google.com/chrome/"
+            },
+            {
+                id: 27,
+                title: "การตั้งค่าวันที่และเวลาทำให้เกิดข้อผิดพลาดใบรับรอง (Your Clock is Ahead/Behind)",
+                category: 10,
+                tags: ["clock", "ssl", "certificate", "date time"],
+                symptoms: "เข้าเว็บ HTTPS แล้วขึ้นเตือนความปลอดภัย 'Your connection is not private' หรือ 'NET::ERR_CERT_DATE_INVALID'",
+                causes: "วันที่และเวลาบนคอมพิวเตอร์ไม่ตรงกับเวลาปัจจุบันจริง (ถ่าน BIOS หมด หรือไทม์โซนผิด)",
+                solutionSteps: [
+                    "คลิกขวาที่นาฬิกามุมขวาล่าง > เลือก 'Adjust date/time'",
+                    "เปิดสวิตช์ 'Set time automatically' และ 'Set time zone automatically' ให้เป็น On",
+                    "กดปุ่ม 'Sync now' เพื่อซิงค์เวลากับเซิร์ฟเวอร์ time.windows.com"
+                ],
+                expectedResult: "เวลาถูกต้อง และแจ้งเตือน SSL Certificate หายไป เข้าเว็บได้ปลอดภัย",
+                nextCheck: "หากเปิดคอมใหม่แล้วเวลาถอยหลังทุกครั้ง ให้เปลี่ยนถ่าน CR2032 บนเมนบอร์ด",
+                reference: "https://support.google.com/chrome/"
+            },
+            {
+                id: 28,
+                title: "อินเทอร์เน็ตช้าเฉพาะบางแอปพลิเคชัน",
+                category: 3,
+                tags: ["app throttle", "qos", "bandwidth limit"],
+                symptoms: "ดู YouTube หรือโหลดเว็บเร็วมาก แต่โปรแกรมซูม (Zoom) หรือเกมกระตุกและมีความหน่วงสูงมาก",
+                causes: "ตั้งค่า Quality of Service (QoS) ในเราเตอร์จำกัดแบนด์วิธแอปนั้นๆ หรือโปรแกรมโดนจำกัดความเร็ว",
+                solutionSteps: [
+                    "ตรวจสอบการตั้งค่า Data Usage Limit ใน Windows (Settings > Network & Internet > Data usage)",
+                    "ปิดโปรแกรมบิตทอร์เรนต์ (BitTorrent) หรือการดาวน์โหลดเบื้องหลังทั้งหมด",
+                    "ลองเปลี่ยนเซิร์ฟเวอร์การเชื่อมต่อภายในโปรแกรมนั้นๆ"
+                ],
+                expectedResult: "ทุกแอปพลิเคชันทำงานได้เต็มความเร็วสมดุลกัน",
+                nextCheck: "ทดสอบการเชื่อมต่อผ่าน Hotspot มือถือเพื่อเทียบความเร็ว",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 29,
+                title: "อินเทอร์เน็ตใช้ได้ในอุปกรณ์อื่นแต่ใช้ไม่ได้ในคอมพิวเตอร์",
+                category: 4,
+                tags: ["pc issue only", "isolation"],
+                symptoms: "โทรศัพท์มือถือและแท็บเล็ตเล่น Wi-Fi บ้านเดียวกันได้ฉลุย แต่คอมพิวเตอร์เครื่องนี้เข้าไม่ได้เครื่องเดียว",
+                causes: "ปัญหาเจาะจงที่ฮาร์ดแวร์/ซอฟต์แวร์ของคอมพิวเตอร์เครื่องนั้น เช่น ค่า IP ค้าง หรือไวรัส",
+                solutionSteps: [
+                    "ทำการล้างค่าเครือข่ายด้วยคำสั่ง netsh winsock reset ใน CMD",
+                    "ปิดการทำงานของแอนตี้ไวรัสภายนอกชั่วคราว",
+                    "ถอดตัวรับ Wi-Fi แบบ USB แล้วเสียบช่อง USB ใหม่"
+                ],
+                expectedResult: "คอมพิวเตอร์เชื่อมต่อและเล่นอินเทอร์เน็ตได้เท่าเทียมอุปกรณ์อื่น",
+                nextCheck: "อัปเดต Windows และไดรเวอร์เครือข่าย",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 30,
+                title: "ปัญหาเครือข่ายหลังอัปเดต Windows (Post-Windows Update Network Bug)",
+                category: 9,
+                tags: ["windows update", "bug", "rollback"],
+                symptoms: "ก่อนอัปเดต Windows เล่นเน็ตได้ปกติ แต่พออัปเดตเสร็จแล้ว เน็ตหลุดทันที การ์ดแลนดับ",
+                causes: "แพตช์อัปเดตล่าสุดมีบั๊กขัดแย้งกับไดรเวอร์เครือข่ายเดิม",
+                solutionSteps: [
+                    "ไปที่ Settings > Update & Security > Windows Update > View update history",
+                    "เลือก 'Uninstall updates' แล้วลบแพตช์ล่าสุดที่เพิ่งติดตั้งออก",
+                    "หรือดาวน์โหลดไดรเวอร์รุ่นล่าสุดจากผู้ผลิตมาลงทับ"
+                ],
+                expectedResult: "ระบบเครือข่ายกลับมาทำงานปกติเหมือนก่อนอัปเดต",
+                nextCheck: "ชะลอการอัปเดต Windows ไว้ชั่วคราว (Pause updates)",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 31,
+                title: "การเชื่อมต่อถูกจำกัดด้วยเครือข่ายองค์กรหรือสถานศึกษา",
+                category: 12,
+                tags: ["corporate", "domain", "firewall block", "school"],
+                symptoms: "เชื่อมต่อ Wi-Fi โรงเรียน/ออฟฟิศได้ แต่เข้าบางเว็บไม่ได้ (ขึ้น Blocked by Administrator)",
+                causes: "ผู้ดูแลระบบ (Admin) ตั้งค่า บล็อกพอร์ต หรือใช้ Firewall กรองเนื้อหาเว็บที่ไม่เกี่ยวข้องกับการทำงาน",
+                solutionSteps: [
+                    "ตรวจสอบว่าต้องทำการล็อกอินผ่านหน้า Captive Portal ขององค์กรก่อนหรือไม่",
+                    "ปฏิบัติตามนโยบาย IT Policy ของสถานศึกษา/องค์กร",
+                    "หากจำเป็นต้องเข้าเว็บเพื่อการศึกษา ให้แจ้งผู้ดูแลระบบเพื่อขออนุมัติ Whitelist"
+                ],
+                expectedResult: "เข้าใจข้อจำกัดของเครือข่ายองค์กรและใช้งานตามสิทธิ์ที่ได้รับ",
+                nextCheck: "ติดต่อฝ่าย IT Support ขององค์กร",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 32,
+                title: "เครือข่ายสาธารณะต้องเข้าสู่ระบบก่อนใช้งาน (Captive Portal Not Loading)",
+                category: 12,
+                tags: ["captive portal", "public wifi", "login page"],
+                symptoms: "ต่อ Wi-Fi หอพัก/สนามบิน/ร้านกาแฟแล้ว แต่หน้าล็อกอินใส่ Username/Password ไม่ยอมเด้งขึ้นมา",
+                causes: "เบราว์เซอร์บล็อกหน้า Pop-up หรือค่า Custom DNS บล็อกการ Redirect เข้าหน้าล็อกอิน",
+                solutionSteps: [
+                    "เปิดเบราว์เซอร์ พิมพ์ที่อยู่ 8.8.8.8 หรือ http://neverssl.com ในช่อง URL แล้วกด Enter เพื่อบังคับเปิดหน้าล็อกอิน",
+                    "ปิดการใช้งาน Custom DNS หรือ VPN ชั่วคราว",
+                    "ลบโปรไฟล์ Wi-Fi แล้วเชื่อมต่อใหม่"
+                ],
+                expectedResult: "หน้าเว็บล็อกอินเด้งขึ้นมาให้ใส่รหัสผ่านเข้าใช้งาน",
+                nextCheck: "ตรวจสอบว่าเปิดป็อปอัป (Pop-ups allowed) ในเบราว์เซอร์แล้ว",
+                reference: "https://support.google.com/chrome/"
+            },
+            {
+                id: 33,
+                title: "การตั้งค่าเครือข่ายผิดพลาดหลังเปลี่ยนเราเตอร์ใหม่",
+                category: 8,
+                tags: ["new router", "gateway mismatch"],
+                symptoms: "เพิ่งเปลี่ยนเราเตอร์ตัวใหม่ คอมพิวเตอร์ยังคงจำค่า IP Gateway เก่า ทำให้เล่นเน็ตไม่ได้",
+                causes: "เราเตอร์เดิมใช้ Subnet 192.168.1.1 แต่เราเตอร์ใหม่ใช้ 192.168.0.1",
+                solutionSteps: [
+                    "เปิด CMD พิมพ์ ipconfig /release แล้วตามด้วย ipconfig /renew",
+                    "หากเคยตั้งค่า Static IP ไว้ ให้เปลี่ยนเป็น Obtain an IP address automatically",
+                    "รีสตาร์ตคอมพิวเตอร์"
+                ],
+                expectedResult: "คอมรับค่า IP และ Gateway ชุดใหม่จากเราเตอร์ใหม่ได้ถูกต้อง",
+                nextCheck: "เช็ก IP Default Gateway ใหม่ด้วยคำสั่ง ipconfig",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 34,
+                title: "สาย LAN หรือพอร์ตเครือข่ายมีปัญหา (Hardware Damage)",
+                category: 2,
+                tags: ["damaged cable", "port failure"],
+                symptoms: "เน็ตหลุดเมื่อขยับสาย LAN หรือความเร็ววิ่งเพียง 10 Mbps ทั้งที่เป็นแพ็กเกจ Gigabyte",
+                causes: "พินเข็มภายในหัว RJ45 ล้ม หัก หรือสายไฟเบอร์ข้างในขาดบางเส้น",
+                solutionSteps: [
+                    "ตรวจสอบปลายสาย LAN ทั้งสองฝั่งว่าพลาสติกล็อกหัว RJ45 หักหรือไม่",
+                    "ลองเปลี่ยนไปเสียบพอร์ต LAN ช่องอื่นที่ตัวเราเตอร์",
+                    "ทดสอบนำสาย LAN เส้นใหม่ (แนะนำ CAT6 ขึ้นไป) มาเปลี่ยนใช้งาน"
+                ],
+                expectedResult: "การเชื่อมต่อแน่นหนา สัญญาณไม่หลุดเมื่อขยับ และความเร็ววิ่งเต็มความจุ",
+                nextCheck: "สังเกตความเร็ว Link Speed ใน Windows Status ต้องขึ้น 1.0 Gbps (1000 Mbps)",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 35,
+                title: "เครือข่ายมีผู้ใช้งานจำนวนมาก (Network Congestion)",
+                category: 3,
+                tags: ["congestion", "heavy load", "lag"],
+                symptoms: "อินเทอร์เน็ตช้ามากในช่วงเวลาเย็น (18.00 - 22.00 น.) ค่า Ping สูงลิ่ว",
+                causes: "การใช้งานหนาแน่นในพื้นที่ (Node ทราฟฟิกเต็ม) หรือสมาชิกในบ้านร่วมกันดึงเน็ตพร้อมกัน",
+                solutionSteps: [
+                    "เข้าหน้าตั้งค่าเราเตอร์เพื่อดูรายการอุปกรณ์ที่เชื่อมต่ออยู่ (Connected Devices)",
+                    "เปลี่ยนไปใช้สาย LAN แทน Wi-Fi เพื่อลดความหน่วงในบ้าน",
+                    "ตั้งค่า QoS ในเราเตอร์ให้ความสำคัญกับคอมพิวเตอร์เครื่องหลัก"
+                ],
+                expectedResult: "ลดความหน่วงและได้แบนด์วิธที่เสถียรขึ้น",
+                nextCheck: "แจ้ง ISP เพื่อขอปรับโหนด หรืออัปเกรดแพ็กเกจ",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 36,
+                title: "การเชื่อมต่อถูกตัดจากผู้ให้บริการอินเทอร์เน็ต (ISP Outage)",
+                category: 4,
+                tags: ["isp down", "outage"],
+                symptoms: "อุปกรณ์ทุกชนิดในบ้านใช้งานไม่ได้พร้อมกัน ไฟสัญญาณบนเราเตอร์ผิดปกติ",
+                causes: "โหนดใหญ่ของผู้ให้บริการขัดข้อง, สายนอกโหนดโดนตัด, หรือปรับปรุงระบบประจำงวด",
+                solutionSteps: [
+                    "เช็กข่าวสารหรือเพจแจ้งเตือนระบบขัดข้องของผู้ให้บริการ (AIS / True / 3BB / NT)",
+                    "โทรติดต่อ Call Center ของผู้ให้บริการเพื่อแจ้งเรื่องและฟังประกาศอัตโนมัติ",
+                    "เปิด Hotspot จากมือถือใช้งานสำรองชั่วคราว"
+                ],
+                expectedResult: "ทราบสาเหตุและระยะเวลาแก้ไขจากผู้ให้บริการ",
+                nextCheck: "รอระบบ ISP ปรับปรุงเสร็จแล้วทำการรีสตาร์ตเราเตอร์",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 37,
+                title: "ปัญหาการเชื่อมต่อผ่าน Personal Hotspot จากมือถือ",
+                category: 12,
+                tags: ["hotspot", "mobile tethering"],
+                symptoms: "เปิด Hotspot จากมือถือแล้ว แต่คอมพิวเตอร์มองไม่เห็น หรือต่อแล้วหลุดบ่อย",
+                causes: "ตั้งค่า Hotspot ในมือถือเป็น 5GHz แต่คอมรับได้แค่ 2.4GHz หรือเปิดโหมดประหยัดแบตเตอรี่",
+                solutionSteps: [
+                    "ในมือถือ ไปที่ตั้งค่า Hotspot > เปิดตัวเลือก 'Maximize Compatibility' (เพิ่มความเข้ากันได้/บังคับใช้ 2.4GHz)",
+                    "ลองเปลี่ยนรหัสผ่าน Hotspot ใหม่",
+                    "ใช้สาย USB เสียบต่อเน็ตผ่าน USB Tethering แทน Wi-Fi Hotspot"
+                ],
+                expectedResult: "คอมพิวเตอร์เชื่อมต่อเน็ตจากมือถือได้เสถียร",
+                nextCheck: "ตรวจสอบปริมาณ Data แพ็กเกจอินเทอร์เน็ตมือถือว่าหมดแล้วหรือยัง",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 38,
+                title: "การเชื่อมต่อ IPv4 หรือ IPv6 มีปัญหา (IPv6 No Internet Access)",
+                category: 7,
+                tags: ["ipv4", "ipv6", "protocol"],
+                symptoms: "ขึ้นสถานะ IPv4: Internet แต่ IPv6: No Internet Access หรือเข้าบางเว็บไซต์ช้าผิดปกติ",
+                causes: "ผู้ให้บริการอินเทอร์เน็ต หรือเราเตอร์รองรับการส่งผ่านข้อมูล IPv6 ไม่สมบูรณ์",
+                solutionSteps: [
+                    "เปิด Control Panel > Network and Sharing Center > Change adapter settings",
+                    "คลิกขวา Adapter ที่ใช้อยู่ เลือก Properties",
+                    "ปลดตารางเครื่องหมายถูกที่ 'Internet Protocol Version 6 (TCP/IPv6)' ออก แล้วกด OK"
+                ],
+                expectedResult: "ระบบบังคับใช้ IPv4 เพียวๆ ทำให้เข้าหน้าเว็บราบรื่นไม่สะดุด",
+                nextCheck: "ทดสอบเข้าเว็บ test-ipv6.com เพื่อดูการรองรับ",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 39,
+                title: "การตั้งค่าเกตเวย์เริ่มต้นไม่ถูกต้อง (Default Gateway is not available)",
+                category: 7,
+                tags: ["gateway", "routing"],
+                symptoms: "Windows รันการ診斷แล้วขึ้น 'The default gateway is not available'",
+                causes: "ค่า IP Gateway บนคอมพิวเตอร์ไม่ตรงกับ IP ของเราเตอร์ หรือฟีเจอร์ประหยัดพลังงานสั่งปิดการ์ดแลน",
+                solutionSteps: [
+                    "ไปที่ Device Manager > Network Adapters > เลือกการ์ดแลน/Wi-Fi > Properties",
+                    "แท็บ Power Management > ปิด 'Allow the computer to turn off this device to save power'",
+                    "อัปเดตไดรเวอร์การ์ดเครือข่าย"
+                ],
+                expectedResult: "Gateway เสถียร ไม่หลุดขัดจังหวะระหว่างใช้งาน",
+                nextCheck: "ตรวจสอบค่า Gateway ด้วย ipconfig ต้องตรงกับ IP เราเตอร์ (เช่น 192.168.1.1)",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 40,
+                title: "อินเทอร์เน็ตมีความหน่วงสูง (High Ping / Latency)",
+                category: 3,
+                tags: ["ping", "latency", "lag", "gaming"],
+                symptoms: "เล่นเกมออนไลน์แล้วขึ้น Ping 200ms+ ตัวละครวาร์ป กระตุก เล่นไม่รู้เรื่อง",
+                causes: "ต่อ Wi-Fi สัญญาณรบกวนสูง, ออกอินเทอร์เน็ตผ่าน Wi-Fi 2.4GHz, หรือเซิร์ฟเวอร์เกมอยู่ต่างประเทศ",
+                solutionSteps: [
+                    "เปลี่ยนมาใช้สาย LAN เสียบตรงเข้าคอมพิวเตอร์เพื่อลด Ping jitter",
+                    "ปิดแอปพลิเคชันแบ็กกราวด์ทั้งหมด เช่น BitTorrent, Steam Update, Discord Stream",
+                    "ลองใช้โปรแกรมลด Ping เช่น ExitLag หรือเปลี่ยนมาใช้ Wi-Fi 5GHz/6GHz"
+                ],
+                expectedResult: "ค่า Ping ลดลงมาอยู่ในเกณฑ์ปกติ (ต่ำกว่า 30-50ms สำหรับเซิร์ฟเวอร์ในประเทศ)",
+                nextCheck: "ใช้คำสั่ง ping 8.8.8.8 -t ใน CMD ดูค่า time=XXms",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 41,
+                title: "การสูญหายของแพ็กเก็ตข้อมูล (Packet Loss)",
+                category: 5,
+                tags: ["packet loss", "drop packet"],
+                symptoms: "เสียงใน Discord ขาดๆ หายๆ, เสียงพูดหุ่นยนต์, เล่นเกมแล้วคำสั่งไม่ทำงานเป็นช่วงๆ",
+                causes: "สาย LAN มีคุณภาพต่ำ/ชำรุด, สัญญาณ Wi-Fi โดนแทรกแทรงอย่างหนัก หรือโหนดเครือข่าย ISP มีปัญหา",
+                solutionSteps: [
+                    "เปิด CMD แล้วพิมพ์ ping google.com -n 50 เพื่อตรวจสอบเปอร์เซ็นต์ Loss",
+                    "หากพบ Packet Loss ให้ลองเปลี่ยนสาย LAN หรือสลับไปใช้ช่องพอร์ต LAN อื่น",
+                    "รีสตาร์ตโมเด็มเราเตอร์เพื่อล้างหน่วยความจำค้าง"
+                ],
+                expectedResult: "การส่งแพ็กเก็ตข้อมูลสมบูรณ์ 100% (0% Loss)",
+                nextCheck: "แจ้ง ISP พร้อมส่งผลทดสอบ Ping Test หากยังพบ Loss เกิน 5%",
+                reference: "https://support.microsoft.com/th-th/windows"
+            },
+            {
+                id: 42,
+                title: "คอมพิวเตอร์เชื่อมต่อเครือข่ายได้แต่บางบริการใช้งานไม่ได้",
+                category: 12,
+                tags: ["service block", "port blocked", "firewall"],
+                symptoms: "เข้าเว็บได้ทุกเว็บ แต่ส่งอีเมลผ่าน Outlook ไม่ได้ หรือต่อ FTP / SSH ไม่ผ่าน",
+                causes: "พอร์ตเฉพาะ (เช่น Port 25, 21, 22) ถูกบล็อกโดย ISP หรือ Firewall",
+                solutionSteps: [
+                    "ตรวจสอบการตั้งค่า Port Number ในโปรแกรมนั้นๆ ให้ตรงกับมาตรฐานใหม่ (เช่น เปลี่ยนจาก Port 25 เป็น 587 สำหรับ SSL SMTP)",
+                    "ตรวจสอบกฎ Inbound/Outbound Rules ใน Windows Defender Firewall",
+                    "ทดสอบปิด Antivirus / Firewall ชั่วคราว"
+                ],
+                expectedResult: "สามารถเชื่อมต่อพอร์ตบริการเฉพาะทางได้สำเร็จ",
+                nextCheck: "ใช้คำสั่ง telnet [domain] [port] เพื่อเช็กว่าพอร์ตเปิดหรือไม่",
+                reference: "https://support.microsoft.com/th-th/windows"
+            }
+        ];
+
+        /* ----------------------------------------------------
+           3. APPLICATION STATE & PAGINATION CONTROL
+        ---------------------------------------------------- */
+        let currentPage = 1;
+        const itemsPerPage = 9;
+        let filteredIssues = [...issuesData];
+        let currentSearchQuery = "";
+        let currentCategoryFilter = "all";
+        let activeModalIssueId = null;
+
+        /* ----------------------------------------------------
+           4. INITIALIZATION & LIFECYCLE
+        ---------------------------------------------------- */
+        window.onload = function() {
+            renderSidebarCategories();
+            renderHomeCategories();
+            renderFeaturedIssues();
+            renderFullCategories();
+            populateCategoryFilterDropdown();
+            updateIssuesList();
+        };
+
+        // Welcome Splash Transition
+        function enterApp() {
+            const splash = document.getElementById('splashScreen');
+            const mainApp = document.getElementById('mainApp');
+            
+            splash.classList.add('opacity-0');
+            setTimeout(() => {
+                splash.classList.add('hidden');
+                mainApp.classList.remove('hidden');
+                showSection('home');
+            }, 500);
+        }
+
+        // Return Back to Initial Landing / Splash Screen
+        function returnToSplashScreen() {
+            const splash = document.getElementById('splashScreen');
+            const mainApp = document.getElementById('mainApp');
+            
+            closeModal();
+            closeSidebarMobile();
+            
+            splash.classList.remove('hidden');
+            setTimeout(() => {
+                splash.classList.remove('opacity-0');
+            }, 10);
+            
+            setTimeout(() => {
+                mainApp.classList.add('hidden');
+            }, 500);
+        }
+
+        // Back to Problem List from Modal Window
+        function backToProblemListFromModal() {
+            closeModal();
+            showSection('all-issues');
+        }
+
+        // Section Navigation Switcher
+        function showSection(sectionId) {
+            const sections = ['home', 'categories', 'all-issues', 'about'];
+            sections.forEach(id => {
+                const el = document.getElementById(`section-${id}`);
+                const navBtn = document.getElementById(`nav-${id}`);
+                if (el) el.classList.add('hidden');
+                if (navBtn) {
+                    navBtn.classList.remove('bg-skybrand-50', 'text-skybrand-600', 'border', 'border-skybrand-100');
+                    navBtn.classList.add('text-slate-600');
+                }
+            });
+
+            const activeSection = document.getElementById(`section-${sectionId}`);
+            const activeNav = document.getElementById(`nav-${sectionId}`);
+            if (activeSection) activeSection.classList.remove('hidden');
+            if (activeNav) {
+                activeNav.classList.add('bg-skybrand-50', 'text-skybrand-600', 'border', 'border-skybrand-100');
+                activeNav.classList.remove('text-slate-600');
+            }
+
+            closeSidebarMobile();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Sidebar Navigation Renderers
+        function renderSidebarCategories() {
+            const container = document.getElementById('sidebarCategories');
+            if (!container) return;
+            container.innerHTML = categories.map(cat => `
+                <button onclick="filterByCategory(${cat.id})" class="w-full text-left px-3 py-2 rounded-lg text-slate-600 hover:bg-skybrand-50 hover:text-skybrand-600 flex justify-between items-center transition">
+                    <span class="truncate">${cat.name}</span>
+                    <span class="px-1.5 py-0.5 bg-skybrand-100 text-skybrand-700 text-[10px] rounded-full font-bold">${cat.count}</span>
+                </button>
+            `).join('');
+        }
+
+        function renderHomeCategories() {
+            const container = document.getElementById('homeCategoriesGrid');
+            if (!container) return;
+            container.innerHTML = categories.slice(0, 8).map(cat => `
+                <div onclick="filterByCategory(${cat.id})" class="bg-white p-4 rounded-2xl border border-skybrand-100 cute-shadow hover:border-skybrand-300 hover:shadow-md transition cursor-pointer group">
+                    <div class="w-10 h-10 rounded-xl bg-skybrand-50 text-skybrand-500 group-hover:bg-skybrand-500 group-hover:text-white flex items-center justify-center mb-3 transition">
+                        <i class="fa-solid ${cat.icon} text-lg"></i>
+                    </div>
+                    <h4 class="font-bold text-skybrand-900 text-sm mb-1 group-hover:text-skybrand-600 transition">${cat.name}</h4>
+                    <p class="text-xs text-slate-400 line-clamp-2">${cat.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderFeaturedIssues() {
+            const container = document.getElementById('featuredIssuesGrid');
+            if (!container) return;
+            const featured = issuesData.slice(0, 6);
+            container.innerHTML = featured.map(issue => createIssueCardHTML(issue)).join('');
+        }
+
+        function renderFullCategories() {
+            const container = document.getElementById('fullCategoriesGrid');
+            if (!container) return;
+            container.innerHTML = categories.map(cat => `
+                <div onclick="filterByCategory(${cat.id})" class="bg-white p-5 rounded-2xl border border-skybrand-100 cute-shadow hover:border-skybrand-300 hover:shadow-lg transition cursor-pointer group flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="w-12 h-12 rounded-2xl bg-skybrand-50 text-skybrand-500 group-hover:bg-skybrand-500 group-hover:text-white flex items-center justify-center transition">
+                                <i class="fa-solid ${cat.icon} text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-skybrand-900 text-base group-hover:text-skybrand-600 transition">${cat.name}</h4>
+                                <span class="text-xs text-slate-400 font-medium">${cat.count} รายการในหมวดนี้</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-4">${cat.desc}</p>
+                    </div>
+                    <div class="flex items-center text-xs font-semibold text-skybrand-600 group-hover:translate-x-1 transition-transform">
+                        <span>ดูรายการปัญหาในหมวดนี้</span>
+                        <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function populateCategoryFilterDropdown() {
+            const select = document.getElementById('categoryFilter');
+            if (!select) return;
+            categories.forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat.id;
+                opt.textContent = cat.name;
+                select.appendChild(opt);
+            });
+        }
+
+        function createIssueCardHTML(issue) {
+            const cat = categories.find(c => c.id === issue.category) || { name: 'ทั่วไป', icon: 'fa-network-wired' };
+            return `
+                <div class="bg-white rounded-2xl border border-skybrand-100 cute-shadow hover:shadow-md transition flex flex-col justify-between p-5 group">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-start gap-2">
+                            <span class="inline-flex items-center px-2.5 py-1 bg-skybrand-50 text-skybrand-600 text-[11px] font-semibold rounded-lg border border-skybrand-100 leading-normal">
+                                <i class="fa-solid ${cat.icon} mr-1.5"></i> ${cat.name}
+                            </span>
+                            <span class="text-[11px] text-slate-400 font-mono">ID #${issue.id}</span>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-base group-hover:text-skybrand-600 transition leading-snug pt-1">${issue.title}</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed line-clamp-2">${issue.symptoms}</p>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+                        <span class="text-[11px] text-slate-400">
+                            <i class="fa-solid fa-check-double text-emerald-500 mr-1"></i>มีคู่มือ 4 ขั้นตอน
+                        </span>
+                        <button onclick="openIssueModal(${issue.id})" class="px-3.5 py-1.5 bg-skybrand-500 hover:bg-skybrand-600 text-white rounded-xl text-xs font-medium transition shadow-sm shadow-skybrand-200">
+                            ดูวิธีแก้ไข
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Filtering & Search Mechanics
+        function handleSearch() {
+            const query = document.getElementById('globalSearchInput').value.trim().toLowerCase();
+            const clearBtn = document.getElementById('clearSearchBtn');
+            currentSearchQuery = query;
+
+            if (query.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            filterData();
+            showSection('all-issues');
+        }
+
+        function clearSearch() {
+            document.getElementById('globalSearchInput').value = '';
+            document.getElementById('clearSearchBtn').classList.add('hidden');
+            currentSearchQuery = '';
+            filterData();
+        }
+
+        function filterByCategory(catId) {
+            currentCategoryFilter = catId;
+            document.getElementById('categoryFilter').value = catId;
+            filterData();
+            showSection('all-issues');
+        }
+
+        function handleCategoryFilterChange(val) {
+            currentCategoryFilter = val;
+            filterData();
+        }
+
+        function filterData() {
+            filteredIssues = issuesData.filter(issue => {
+                const matchesCategory = (currentCategoryFilter === 'all' || issue.category == currentCategoryFilter);
+                const matchesSearch = currentSearchQuery === "" || 
+                    issue.title.toLowerCase().includes(currentSearchQuery) ||
+                    issue.symptoms.toLowerCase().includes(currentSearchQuery) ||
+                    issue.causes.toLowerCase().includes(currentSearchQuery) ||
+                    issue.tags.some(t => t.toLowerCase().includes(currentSearchQuery));
+                return matchesCategory && matchesSearch;
+            });
+
+            currentPage = 1;
+            updateIssuesList();
+        }
+
+        function updateIssuesList() {
+            const container = document.getElementById('issuesContainer');
+            const noResults = document.getElementById('noResultsBox');
+            const pagination = document.getElementById('paginationControls');
+            const title = document.getElementById('issuesTitle');
+            const subtitle = document.getElementById('issuesSubtitle');
+
+            if (!container) return;
+
+            // Header titles
+            if (currentCategoryFilter !== 'all') {
+                const catObj = categories.find(c => c.id == currentCategoryFilter);
+                title.textContent = catObj ? catObj.name : "รายการปัญหา";
+                subtitle.textContent = `แสดงรายการปัญหาในหมวดหมู่ ${catObj ? catObj.name : ''} (${filteredIssues.length} รายการ)`;
+            } else if (currentSearchQuery !== '') {
+                title.textContent = `ผลการค้นหา: "${currentSearchQuery}"`;
+                subtitle.textContent = `พบข้อมูลที่ตรงกัน ${filteredIssues.length} รายการ`;
+            } else {
+                title.textContent = "รายการปัญหาทั้งหมด";
+                subtitle.textContent = `แสดงรายการปัญหาและวิธีแก้ไขทั้งหมด (${filteredIssues.length} รายการ)`;
+            }
+
+            if (filteredIssues.length === 0) {
+                container.innerHTML = '';
+                noResults.classList.remove('hidden');
+                pagination.classList.add('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+            pagination.classList.remove('hidden');
+
+            const totalPages = Math.ceil(filteredIssues.length / itemsPerPage);
+            const startIdx = (currentPage - 1) * itemsPerPage;
+            const pageItems = filteredIssues.slice(startIdx, startIdx + itemsPerPage);
+
+            container.innerHTML = pageItems.map(issue => createIssueCardHTML(issue)).join('');
+
+            // Pagination UI Update
+            document.getElementById('pageIndicator').textContent = `หน้า ${currentPage} / ${totalPages || 1}`;
+            document.getElementById('prevPageBtn').disabled = (currentPage === 1);
+            document.getElementById('nextPageBtn').disabled = (currentPage >= totalPages);
+        }
+
+        function changePage(delta) {
+            const totalPages = Math.ceil(filteredIssues.length / itemsPerPage);
+            const newPage = currentPage + delta;
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                updateIssuesList();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Modal Handler
+        function openIssueModal(issueId) {
+            const issue = issuesData.find(i => i.id === issueId);
+            if (!issue) return;
+
+            activeModalIssueId = issueId;
+            const cat = categories.find(c => c.id === issue.category) || { name: 'ทั่วไป' };
+
+            document.getElementById('modalCategoryBadge').textContent = cat.name;
+            document.getElementById('modalTitle').textContent = issue.title;
+            document.getElementById('modalSymptoms').textContent = issue.symptoms;
+            document.getElementById('modalCauses').textContent = issue.causes;
+            document.getElementById('modalExpected').textContent = issue.expectedResult;
+            document.getElementById('modalNextCheck').textContent = issue.nextCheck;
+            
+            const refLink = document.getElementById('modalRefLink');
+            refLink.href = issue.reference;
+            refLink.textContent = issue.reference;
+
+            // Populate Steps
+            const stepsContainer = document.getElementById('modalSteps');
+            stepsContainer.innerHTML = issue.solutionSteps.map((step, idx) => `
+                <div class="flex items-start space-x-3 bg-slate-50 p-3 rounded-xl border border-skybrand-100">
+                    <div class="w-6 h-6 rounded-full bg-skybrand-500 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+                        ${idx + 1}
+                    </div>
+                    <p class="text-slate-700 leading-relaxed text-xs sm:text-sm">${step}</p>
+                </div>
+            `).join('');
+
+            const modal = document.getElementById('issueModal');
+            const modalContent = document.getElementById('modalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('issueModal');
+            const modalContent = document.getElementById('modalContent');
+            if (!modal) return;
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        // Direct Google Search integration
+        function searchModalIssueOnGoogle() {
+            if (!activeModalIssueId) return;
+            const issue = issuesData.find(i => i.id === activeModalIssueId);
+            if (issue) {
+                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(issue.title + ' วิธีแก้ปัญหา')}`;
+                window.open(searchUrl, '_blank');
+            }
+        }
+
+        function searchCurrentOnGoogle() {
+            const query = currentSearchQuery || "วิธีแก้ไขปัญหาอินเทอร์เน็ตบนคอมพิวเตอร์";
+            window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
+        }
+
+        function openGoogleSearchModal() {
+            document.getElementById('googleSearchPromptModal').classList.remove('hidden');
+        }
+
+        function closeGooglePrompt() {
+            document.getElementById('googleSearchPromptModal').classList.add('hidden');
+        }
+
+        function execGooglePromptSearch() {
+            const val = document.getElementById('customGoogleQuery').value.trim();
+            if (val) {
+                window.open(`https://www.google.com/search?q=${encodeURIComponent(val)}`, '_blank');
+                closeGooglePrompt();
+            }
+        }
+
+        // Mobile Sidebar Drawer
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        function closeSidebarMobile() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (sidebar) sidebar.classList.add('-translate-x-full');
+            if (overlay) overlay.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
